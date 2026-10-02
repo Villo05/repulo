@@ -1,0 +1,37 @@
+<?php
+
+use App\Models\Travel;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('travel', function (Blueprint $table) {
+            $table->id();
+            $table->string('evaluation');
+            $table->foreignId('flight_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->timestamps();
+        });
+
+        Travel::create([
+            'evaluation' => 'Good',
+            'flight_id' => 1,
+            'user_id' => 1,
+        ]);
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('travel');
+    }
+};
