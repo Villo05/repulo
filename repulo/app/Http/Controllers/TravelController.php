@@ -29,7 +29,7 @@ class TravelController extends Controller
      */
     public function store(StoreTravelRequest $request)
     {
-        //
+        return Travel::create($request->all());
     }
 
     /**
@@ -37,7 +37,7 @@ class TravelController extends Controller
      */
     public function show(Travel $travel)
     {
-        //
+        return Travel::find($travel);
     }
 
     /**
@@ -53,7 +53,10 @@ class TravelController extends Controller
      */
     public function update(UpdateTravelRequest $request, Travel $travel)
     {
-        //
+        $travel = Travel::find($travel);
+        $travel->fill($request->all());
+        $travel->save();
+        return $travel;
     }
 
     /**
@@ -61,6 +64,8 @@ class TravelController extends Controller
      */
     public function destroy(Travel $travel)
     {
-        //
+        $travel = Travel::find($travel);
+        $travel->delete();
+        return $travel;
     }
 }

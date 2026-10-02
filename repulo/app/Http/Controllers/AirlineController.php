@@ -29,7 +29,7 @@ class AirlineController extends Controller
      */
     public function store(StoreAirlineRequest $request)
     {
-        //
+        return Airline::create($request->all());
     }
 
     /**
@@ -37,7 +37,7 @@ class AirlineController extends Controller
      */
     public function show(Airline $airline)
     {
-        //
+        return Airline::find($airline);
     }
 
     /**
@@ -53,7 +53,10 @@ class AirlineController extends Controller
      */
     public function update(UpdateAirlineRequest $request, Airline $airline)
     {
-        //
+        $airline=Airline::find($airline);
+        $airline -> fill($request->all());
+        $airline -> save();
+        return $airline;
     }
 
     /**
@@ -61,6 +64,8 @@ class AirlineController extends Controller
      */
     public function destroy(Airline $airline)
     {
-        //
+         $airline = Airline::find($airline);
+         $airline->delete();
+         return $airline;
     }
 }

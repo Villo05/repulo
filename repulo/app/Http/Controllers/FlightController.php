@@ -29,7 +29,7 @@ class FlightController extends Controller
      */
     public function store(StoreFlightRequest $request)
     {
-        //
+        return Flight::create($request->all());
     }
 
     /**
@@ -37,7 +37,7 @@ class FlightController extends Controller
      */
     public function show(Flight $flight)
     {
-        //
+        return Flight::find($flight);
     }
 
     /**
@@ -53,7 +53,10 @@ class FlightController extends Controller
      */
     public function update(UpdateFlightRequest $request, Flight $flight)
     {
-        //
+        $flight = Flight::find($flight);
+        $flight->fill($request->all());
+        $flight->save();
+        return $flight;
     }
 
     /**
@@ -61,6 +64,8 @@ class FlightController extends Controller
      */
     public function destroy(Flight $flight)
     {
-        //
+        $flight = Flight::find($flight);
+        $flight->delete();
+        return $flight;
     }
 }
